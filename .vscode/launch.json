@@ -1,0 +1,26 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Chrome Launch index.html",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "tsc",
+            "file": "${workspaceFolder}/index.html",
+            "runtimeArgs": [
+                "--allow-file-access-from-files",
+                "--disable-web-security"
+           ]
+        },
+        {
+            "name": "Edge Launch index.html",
+            "type": "edge",
+            "request": "launch",
+            "preLaunchTask": "tsc",
+            "file": "${workspaceFolder}/index.html"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "cgprendering",
+  "version": "1.0.0",
+  "description": "Tokyo Denki University CG Rendering and Practice Program Template",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomoakimoriya/CGPRendering.git"
+  },
+  "author": "Tomoaki Moriya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomoakimoriya/CGPRendering/issues"
+  },
+  "homepage": "https://github.com/tomoakimoriya/CGPRendering#readme",
+  "dependencies": {
+    "@types/three": "^0.92.0",
+    "three": "^0.92.0"
+  }
+}
