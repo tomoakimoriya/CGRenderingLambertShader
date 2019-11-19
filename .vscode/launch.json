@@ -5,22 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Chrome Launch index.html",
             "type": "chrome",
             "request": "launch",
-            "preLaunchTask": "tsc",
-            "file": "${workspaceFolder}/index.html",
-            "runtimeArgs": [
-                "--allow-file-access-from-files",
-                "--disable-web-security"
-           ]
+            "name": "localhost に対して Chrome を起動",
+            "url": "http://localhost:8080",
+            "preLaunchTask": "npm: start",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
         },
         {
-            "name": "Edge Launch index.html",
             "type": "edge",
             "request": "launch",
-            "preLaunchTask": "tsc",
-            "file": "${workspaceFolder}/index.html"
-        }
+            "name": "Launch Edge",
+            "url": "http://localhost:8080",
+            "preLaunchTask": "npm: start",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+        },
     ]
 }

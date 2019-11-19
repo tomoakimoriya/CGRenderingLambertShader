@@ -1,12 +1,21 @@
 # CGPRendering
-CG Rendering and Practice Program Template  
+CG Rendering and Practice Program Template
 
-1. Run `git clone https://github.com/tomoakimoriya/CGPRendering.git` in Command Prompt, PowerShell or Terminal.
 
-2. Open cloned folder in Visual Studio Code.
+## Installation
 
-3. Run `npm install` in Visual Studio Code integrated terminal.
+1. Install [Node.js](https://nodejs.org/ja/)
+
+2. Open `cgm.code-workspace` Visual Studio Code.
+
+3. Press F1 (or Ctrl+Shift+P / Cmd+Shift+P), type `run task`, select `npm: install`
 
 4. Enjoy!
 
+
+## Edit another code
+
+Ordinary, it runs `src/app.ts` only. So you can save your code by copying and renaming (e.g. `app-1.ts`).
+
+---
 Tokyo Denki University, Department of Information Systems and Multimedia Design
