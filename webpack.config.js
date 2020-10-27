@@ -1,16 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const threeVectorCloneTransformerFactory = require('./threeVectorCloneTransformer').default;
 
 /**
  * @type import('webpack').Configuration
  */
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, 'src', 'app.ts'),
+    entry: './src/app.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js',
+        chunkFilename: 'vendor.js',
     },
     resolve: {
         extensions: ['.js', '.ts']
@@ -19,24 +21,46 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                use: 'ts-loader',
+                loader: 'ts-loader',
+                options: {
+                    getCustomTransformers: (program) => ({
+                        before: [threeVectorCloneTransformerFactory(program)]
+                    }),
+                }
             },
             {
                 test: /\.(vs|fs|txt)$/,
                 include: [
                     path.resolve(__dirname, "src"),
                 ],
-                use: 'raw-loader',
+                loader: 'raw-loader',
             },
         ],
     },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
     plugins: [
         new HtmlWebpackPlugin(),
-        new CopyWebpackPlugin([
-            { from: '*.png', context: 'src' },
-            { from: '*.jpg', context: 'src' },
-            { from: '*.gif', context: 'src' },
-        ]),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: '**/*',
+                    context: 'src',
+                    globOptions: {
+                        ignore: ['**/*.ts', '**/*.js', '**/*.fs', '**/*.vs', '**/*.txt']
+                    },
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: '**/*',
+                    context: 'assets',
+                    noErrorOnMissing: true,
+                }
+            ],
+        }),
     ],
     devtool: "inline-source-map",
     devServer: {

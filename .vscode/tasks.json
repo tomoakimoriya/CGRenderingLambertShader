@@ -38,10 +38,10 @@
       "problemMatcher": [],
     },
     {
-      "type": "npm",
+      "type": "shell",
       "label": "npm: install",
       "problemMatcher": [],
-      "script": "install"
+      "command": "npm install --loglevel error"
     }
   ]
 }

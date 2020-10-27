@@ -4,6 +4,7 @@ import * as dat from "dat.gui";
 import * as Stats from "stats.js";
 import * as TWEEN from "@tweenjs/tween.js";
 import * as Physijs from "physijs-webpack";
+import { Matrix3, Quaternion } from "three";
 
 
 class ThreeJSContainer {
@@ -13,7 +14,7 @@ class ThreeJSContainer {
     private cube: THREE.Mesh;
     private light: THREE.Light;
     private torus: THREE.Mesh;
-    private uniforms: THREE.Uniform[];
+    private uniforms: {[uniform: string]: THREE.IUniform};
 
     constructor() {
         this.createScene();
@@ -56,10 +57,11 @@ class ThreeJSContainer {
         const vert = require("./vertex.vs").default;
         const frag = require("./fragment.fs").default;
 
-        let otherUniforms = { modelcolor: new THREE.Uniform(new THREE.Vector3(0, 1, 0)) };
+        this.uniforms = {};
+        this.uniforms["modelcolor"] = new THREE.Uniform(new THREE.Vector3(0, 1, 0));
         this.uniforms = THREE.UniformsUtils.merge([
             THREE.UniformsLib["lights"],
-            otherUniforms
+            this.uniforms
         ]);
         this.material = new THREE.ShaderMaterial({
             lights: true,
@@ -71,7 +73,7 @@ class ThreeJSContainer {
         this.torus = new THREE.Mesh(this.geometry, this.material);
         this.scene.add(this.torus);
         this.light = new THREE.DirectionalLight(0xffffff);
-        var lvec = new THREE.Vector3(1, 1, 1).normalize();
+        var lvec = new THREE.Vector3(0, 1, 0).normalize();
         this.light.position.set(lvec.x, lvec.y, lvec.z);
         this.scene.add(this.light);
 
@@ -79,7 +81,9 @@ class ThreeJSContainer {
         // 毎フレームのupdateを呼んで，更新
         // reqest... により次フレームを呼ぶ
         const update = () => {
-            this.torus.rotateX(0.01);
+            const rotXMat = new THREE.Matrix4();
+            rotXMat.makeRotationX(0.01);
+            this.light.position.copy(this.light.position.applyMatrix4(rotXMat));
 
             requestAnimationFrame(update);
         }
