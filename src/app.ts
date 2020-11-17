@@ -3,9 +3,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as dat from "dat.gui";
 import * as Stats from "stats.js";
 import * as TWEEN from "@tweenjs/tween.js";
-import * as Physijs from "physijs-webpack";
-import { Matrix3, Quaternion } from "three";
-
 
 class ThreeJSContainer {
     private scene: THREE.Scene;
@@ -14,7 +11,6 @@ class ThreeJSContainer {
     private cube: THREE.Mesh;
     private light: THREE.Light;
     private torus: THREE.Mesh;
-    private uniforms: {[uniform: string]: THREE.IUniform};
 
     constructor() {
         this.createScene();
@@ -57,15 +53,18 @@ class ThreeJSContainer {
         const vert = require("./vertex.vs").default;
         const frag = require("./fragment.fs").default;
 
-        this.uniforms = {};
-        this.uniforms["modelcolor"] = new THREE.Uniform(new THREE.Vector3(0, 1, 0));
-        this.uniforms = THREE.UniformsUtils.merge([
+        let uniforms = {
+            modelcolor: new THREE.Uniform(new THREE.Vector3(0, 1, 0)),
+        }
+
+        uniforms = THREE.UniformsUtils.merge([
             THREE.UniformsLib["lights"],
-            this.uniforms
+            uniforms
         ]);
+
         this.material = new THREE.ShaderMaterial({
             lights: true,
-            uniforms: this.uniforms,
+            uniforms: uniforms,
             vertexShader: vert,
             fragmentShader: frag
         });
