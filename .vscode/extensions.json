@@ -4,7 +4,6 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-    "msjsdiag.debugger-for-chrome",
     "ms-ceintl.vscode-language-pack-ja",
     "editorconfig.editorconfig"
   ],
