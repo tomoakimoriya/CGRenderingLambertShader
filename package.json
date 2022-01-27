@@ -27,7 +27,7 @@
     "dat.gui": "^0.7.7",
     "physijs-webpack": "^0.1.4",
     "stats.js": "^0.17.0",
-    "three": "^0.132.2"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@types/webpack": "^4.41.22",
