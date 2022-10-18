@@ -11,7 +11,7 @@ module.exports = {
     entry: './src/app.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'app.js',
+        filename: '[name].js',
         chunkFilename: 'vendor.js',
     },
     resolve: {
@@ -64,7 +64,9 @@ module.exports = {
     ],
     devtool: "inline-source-map",
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
+        static: {
+            directory: path.join(__dirname, "dist"),
+        },
         port: 8080,
     },
 }

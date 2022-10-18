@@ -1,8 +1,5 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import * as dat from "dat.gui";
-import * as Stats from "stats.js";
-import * as TWEEN from "@tweenjs/tween.js";
 
 class ThreeJSContainer {
     private scene: THREE.Scene;
@@ -13,7 +10,7 @@ class ThreeJSContainer {
     private torus: THREE.Mesh;
 
     constructor() {
-        this.createScene();
+
     }
 
     // 画面部分の作成(表示する枠ごとに)
@@ -27,6 +24,8 @@ class ThreeJSContainer {
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         const orbitControls = new OrbitControls(camera, renderer.domElement);
+
+        this.createScene();
 
         // 毎フレームのupdateを呼んで，render
         // reqest... により次フレームを呼ぶ
@@ -90,7 +89,11 @@ class ThreeJSContainer {
     }
 }
 
-const container = new ThreeJSContainer();
+window.addEventListener("DOMContentLoaded", init);
 
-const viewport = container.createRendererDOM(640, 480, new THREE.Vector3(3, 3, 3));
-document.body.appendChild(viewport);
+function init() {
+    let container = new ThreeJSContainer();
+
+    let viewport = container.createRendererDOM(640, 480, new THREE.Vector3(3, 3, 3));
+    document.body.appendChild(viewport);
+}

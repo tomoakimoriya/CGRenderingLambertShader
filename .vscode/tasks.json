@@ -24,7 +24,7 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": "(Compiling\\.\\.\\.|Project\\sis\\srunning)",
-          "endsPattern": "(Compiled|Failed)",
+          "endsPattern": "(Compiled|compiled|Failed|failed)",
         }
       },
     },
